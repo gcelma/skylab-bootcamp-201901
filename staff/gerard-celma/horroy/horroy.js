@@ -18,3 +18,6 @@ function Horroy() {
     }
 };
 
+Horroy.prototype.push = function(value) {
+    
+};
