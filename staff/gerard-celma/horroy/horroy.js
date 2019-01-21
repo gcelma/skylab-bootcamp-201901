@@ -51,3 +51,35 @@ Horroy.prototype.shift = function() {
 
     return result;
 };
+
+Horroy.prototype.find = function(callback) {
+    if (arguments.length > 1) throw Error('too many arguments');
+    if(!(callback instanceof Function)) throw TypeError(callback + ' is not a function');
+
+    for(var i = 0; i<this.length; i++) {
+        var value = this[i];
+
+
+        if(callback(value)) return value;
+    }
+};
+
+Horroy.prototype.indexOf = function(value,index) {
+    
+    if(!index) {
+        for(var i=0; i<this.length; i++) {
+            if(value === this[i]) {
+                return i;
+            }
+        }
+        return -1;
+    } else if(index) {
+        if(typeof index !== Number) throw TypeError('the index should be a number');
+        for( var i = index; i<this.length; i++) {
+            if(value === this[i]) {
+                return i;
+            }
+        }
+        return -1;
+    }
+};

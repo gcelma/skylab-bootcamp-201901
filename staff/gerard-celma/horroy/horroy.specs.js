@@ -60,9 +60,6 @@ describe('Horroy', function() {
             });
 
         });
-        describe('FAIL', function() {
-            
-        });
     });
 
     describe('--> pop()', function() {
@@ -90,6 +87,54 @@ describe('Horroy', function() {
 
                 expect(result1).toBe(1);
                 expect(horr1.toString()).toBe({ 0: 2, 1: 3, length: 2 }.toString());
+            });
+        });
+    });
+
+    describe('--> find()', function() {
+        describe('SUCCES', function() {
+            it('should return the first value in horroy based in callback condition', function() {
+                var horr1 = new Horroy(10,2,30);
+                var callback = function(value){if(value>10) { return value}};
+                var result1 = horr1.find(callback);
+
+                expect(result1).toBe(30);
+            });
+        });
+
+        describe('FAIL', function() {
+            it('should not allow to pass a callback that is not a function', function() {
+                var error;
+                var horr1 = new Horroy(10,2,30);
+                var value = 5;
+
+                try{
+                    horr1.find(value);
+                }catch(err) {
+                    error = err;
+                }
+               
+                expect(error.toString()).toBe('TypeError: ' + value + ' is not a function');
+            });
+        });
+    });
+
+    describe('--> indexOf()', function() {
+        describe('SUCCES', function() {
+            it('should return the position of the searched element in the Horroy, without index', function() {
+                var horr1 = new Horroy(1,2,3,4,5,6);
+
+                var result = horr1.indexOf(3);
+
+                expect(result).toBe(2);
+            });
+
+            it('should return the position of the searched element in the Horroy, with index', function() {
+                var horr1 = new Horroy(1,2,3,4,5,6);
+
+                var result = horr1.indexOf(3,0);
+
+                expect(result).toBe(2);
             });
         });
     });
