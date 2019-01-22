@@ -83,3 +83,15 @@ Horroy.prototype.indexOf = function(value,index) {
         return -1;
     }
 };
+
+Horroy.prototype.fill = function(value,start,end) {
+    if (arguments.length > 3) throw Error('too many arguments');
+    
+    start = start === undefined ? 0 : (start < 0 ? this.length + start : start);
+    end = end === undefined ? this.length : (end < 0 ? this.length + end : end);
+
+    for (var i = start; i < end; i++)
+        this[i] = value;
+
+    return this;
+};

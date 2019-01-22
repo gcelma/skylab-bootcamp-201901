@@ -138,4 +138,24 @@ describe('Horroy', function() {
             });
         });
     });
+
+    describe('--> fill()', function() {
+        describe('SUCCES', function() {
+            it('should return all the postions of the Horroy filled with the desired value', function() {
+                var horr1 = new Horroy(1,2,3,4,5,6);
+
+                var result = horr1.indexOf(3);
+
+                expect(result).toBe(2);
+            });
+
+            // it('should return the position of the searched element in the Horroy, with index', function() {
+            //     var horr1 = new Horroy(1,2,3,4,5,6);
+
+            //     var result = horr1.indexOf(3,0);
+
+            //     expect(result).toBe(2);
+            // });
+        });
+    });
 });
