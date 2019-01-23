@@ -144,17 +144,39 @@ describe('Horroy', function() {
             it('should return all the postions of the Horroy filled with the desired value', function() {
                 var horr1 = new Horroy(1,2,3,4,5,6);
 
-                var result = horr1.indexOf(3);
+                var result = horr1.fill(3);
 
-                expect(result).toBe(2);
+                expect(result).toEqual(jasmine.objectContaining({ 0: 3, 1: 3, 2: 3, 3: 3, 4: 3, 5: 3, length: 6 }));
             });
 
-            // it('should return the position of the searched element in the Horroy, with index', function() {
+            it('should return all the desired postions (we give start and end) of the Horroy filled with the desired value', function() {
+                var horr1 = new Horroy(1,2,3,4,5,6);
+
+                var result = horr1.fill(3,0,2);
+
+                expect(result).toEqual(jasmine.objectContaining({ 0: 3, 1: 3, 2: 3, 3: 4, 4: 5, 5: 6, length: 6 }));
+            });
+        });
+    });
+
+    describe('--> filter()', function() {
+        describe('SUCCES', function() {
+            it('should return a new Horroy with all the values matching the callback condition', function() {
+                var horr1 = new Horroy(1,2,3,4,5,6);
+
+                var result = horr1.filter(function(item) {
+                    return item > 2;
+                });
+
+                expect(result).toEqual(jasmine.objectContaining({ 0: 3, 1: 4, 2: 5, 3: 6, length: 4 }));
+            });
+
+            // it('should return all the desired postions (we give start and end) of the Horroy filled with the desired value', function() {
             //     var horr1 = new Horroy(1,2,3,4,5,6);
 
-            //     var result = horr1.indexOf(3,0);
+            //     var result = horr1.fill(3,0,2);
 
-            //     expect(result).toBe(2);
+            //     expect(result).toEqual(jasmine.objectContaining({ 0: 3, 1: 3, 2: 3, 3: 4, 4: 5, 5: 6, length: 6 }));
             // });
         });
     });

@@ -95,3 +95,16 @@ Horroy.prototype.fill = function(value,start,end) {
 
     return this;
 };
+
+Horroy.prototype.filter = function(callback) {
+    if(!(callback instanceof Function)) throw TypeError(callback + ' is not a function');
+
+     var result = new Horroy;
+
+     for (var i = 0; i < this.length; i++) {
+        if(callback(this[i])) {
+            result[result.length] = this[i];
+        }
+    }
+    return result;
+};
