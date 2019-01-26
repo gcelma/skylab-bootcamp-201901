@@ -28,7 +28,7 @@ const logic = {
 
         if (typeof callback !== 'function') throw TypeError(`${callback} is not a function`)
 
-        spotifyApi.searchArtists(query, callback)
+        spotifyApi.retrieveAlbums(artistId, callback)
     }
 
     // TODO retrieveTracks(albumId, callback) // endpoint /v1/albums/${albumId}/tracks

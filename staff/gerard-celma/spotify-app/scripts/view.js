@@ -1,3 +1,5 @@
+//#region Panel
+
 class Panel {
     constructor($container) {
         this.$container = $container
@@ -11,6 +13,10 @@ class Panel {
         this.$container.hide()
     }
 }
+
+//#endregion
+
+//#region SearchPanel
 
 class SearchPanel extends Panel {
     constructor() {
@@ -37,6 +43,10 @@ class SearchPanel extends Panel {
     }
 }
 
+//#endregion
+
+//#region ArtistsPanel
+
 class ArtistsPanel extends Panel {
     constructor() {
         super($(`<section class="results container">
@@ -51,7 +61,50 @@ class ArtistsPanel extends Panel {
         artists.forEach(({ id, name }) => {
             const $item = $(`<li data-id=${id}>${name}</li>`)
 
+            $item.click(() =>{
+                const id = $item.data('id')
+                this.__onArtistSelected__(id)
+            });
+
             this.__$list__.append($item)
-        })
+        });
+    }
+
+    set onArtistSelected(callback) {
+        this.__onArtistSelected__ = callback;
     }
 }
+
+//#endregion
+
+//#region AlbumPanel
+
+class AlbumPanel extends Panel {
+    constructor() {
+        super($(`<section class="albums container">
+    <h3>Albums</h3>
+    <ul></ul>
+</section`));
+
+        this.__$albumslist__ = this.$container.find('ul')
+    }
+
+    set albums(albums) {
+        albums.forEach(({ id, name }) => {
+            const $item = $(`<li data-id=${id}>${name}</li>`)
+
+            $item.click(() =>{
+                const id = $item.data('id')
+                this.__onAlbumSelected__(id)
+            });
+
+            this.__$albumslist__.append($item)
+        })
+    }
+
+    clear() {
+        this.__$albumslist__.empty()
+    }
+}
+
+//#endregion
