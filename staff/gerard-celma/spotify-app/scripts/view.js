@@ -102,8 +102,48 @@ class AlbumPanel extends Panel {
         })
     }
 
+    set onAlbumSelected(callback) {
+        this.__onAlbumSelected__ = callback;
+    }
+
     clear() {
         this.__$albumslist__.empty()
+    }
+}
+
+//#endregion
+
+//#region SongsPanel
+
+class SongsPanel extends Panel {
+    constructor() {
+        super($(`<section class="songs container">
+        <h3>Songs</h3>
+        <ul></ul>
+    </section`));
+
+    this.__$songsList__ = this.$container.find('ul');
+    }
+
+    set songs(songs) {
+        songs.forEach(({ id, name, preview_url }) => {
+            const $item = $(`<li data-id=${id}>${name}<audio src="${preview_url}" controls></audio></li>`)
+
+            // $item.click(() => {
+            //     const id = $item.data('id')
+            //     this.__onSongSelected__(id)
+            // });
+
+            this.__$songsList__.append($item)
+        });
+    }
+
+    set onSongSelected(callback) {
+        this.__onSongSelected__ = callback
+    }
+
+    clear() {
+        this.__$songsList__.empty();
     }
 }
 

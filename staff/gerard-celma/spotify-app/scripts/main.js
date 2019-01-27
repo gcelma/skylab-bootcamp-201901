@@ -1,17 +1,21 @@
-spotifyApi.token = 'BQA3BpD8l2cKgCoPfcE0fx3gyjXatudm6okSnOVnlMn638QbUmS1ggewxcPCpJZrAUQfU4GjJToZvq9K28q4ssEbJmZrgp2bmnEBM_d47yunTPwP_dVkDx4gZcQeqE4l1zCdHVIWI_2SMbjUSxM'
+spotifyApi.token = 'BQA6GYhVjr9sknLWP6TjXNzYm0167EDyCU3ISFEIx3tuL-5CNskFJuOhj2EcdQSbud_5pogEe9F9fwKM6BSeacoOLYw0UvJ8sryBSHTJ1irhjgCH0vOCGn0wxWLKiKr4KgjUEGPqJB98HrMsA2A'
 
 const searchPanel = new SearchPanel
 const artistsPanel = new ArtistsPanel
 const albumPanel = new AlbumPanel
+const songsPanel = new SongsPanel
 
 const $root = $('#root')
 
 artistsPanel.hide()
 albumPanel.hide()
+songsPanel.hide()
 
 $root.append(searchPanel.$container)
 $root.append(artistsPanel.$container)
 $root.append(albumPanel.$container)
+$root.append(songsPanel.$container)
+
 
 searchPanel.onSearch = function(query) {
     try {
@@ -46,3 +50,21 @@ artistsPanel.onArtistSelected = function(artistId) {
     }
 }
 
+albumPanel.onAlbumSelected = function(albumId) {
+    try {
+        logic.retrieveSongs(albumId, function(error,songs) {
+            if(error) searchPanel.error = error.message;
+            else {
+                songsPanel.clear();
+
+                albumPanel.hide();
+
+                songsPanel.songs = songs;
+
+                songsPanel.show();
+            }
+        });
+    } catch (err){
+
+    }
+}
