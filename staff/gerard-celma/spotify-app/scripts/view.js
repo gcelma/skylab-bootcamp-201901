@@ -23,12 +23,13 @@ class SearchPanel extends Panel {
         super($(`<section class="search container">
         <h2>Search</h2>
     <form>
-        <input type="text" name="query" placeholder="Search an artist...">
-        <button type="submit">Search</button>
+        <input type="text" name="query" placeholder="Search an artist..." class="form-control">
+        <button type="submit" class="btn btn-light">Search</button>
     </form>
 </section>`))
 
         this.__$form__ = this.$container.find('form')
+        this.__$input__ = this.$container.find('input')
         this.__$query__ = this.__$form__.find('input')
     }
 
@@ -40,6 +41,10 @@ class SearchPanel extends Panel {
 
             callback(query)
         })
+    }
+
+    clear() {
+        this.__$input__.val('');
     }
 }
 
@@ -120,14 +125,16 @@ class SongsPanel extends Panel {
         super($(`<section class="songs container">
         <h3>Songs</h3>
         <ul></ul>
+        <button type="submit" class="btn btn-light">Back</button>
     </section`));
 
     this.__$songsList__ = this.$container.find('ul');
+    this.__$backButton__ = this.$container.find('button');
     }
 
     set songs(songs) {
         songs.forEach(({ id, name, preview_url }) => {
-            const $item = $(`<li data-id=${id}>${name}<audio src="${preview_url}" controls></audio></li>`)
+            const $item = $(`<li data-id=${id}><p>${name}</p><audio src="${preview_url}" controls></audio></li>`)
 
             // $item.click(() => {
             //     const id = $item.data('id')
@@ -144,6 +151,14 @@ class SongsPanel extends Panel {
 
     clear() {
         this.__$songsList__.empty();
+    }
+
+    
+    set onGoBack(callback) {
+        this.__$backButton__.on('click', function(event){
+            event.preventDefault();
+            callback()  
+        });
     }
 }
 

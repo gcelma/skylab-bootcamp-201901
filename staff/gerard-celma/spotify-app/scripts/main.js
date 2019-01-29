@@ -1,4 +1,4 @@
-spotifyApi.token = 'BQA6GYhVjr9sknLWP6TjXNzYm0167EDyCU3ISFEIx3tuL-5CNskFJuOhj2EcdQSbud_5pogEe9F9fwKM6BSeacoOLYw0UvJ8sryBSHTJ1irhjgCH0vOCGn0wxWLKiKr4KgjUEGPqJB98HrMsA2A'
+spotifyApi.token = 'BQDteBtyfhYDIehJ40c-J8zzvKmqUP-hW934FGMokqOHQy8wXQ8Gq8D2NIsCBKpm0tE_e85k7cMw-J5361vanSZrUvH86m1v2cb0oNQ1t7TKDOiDEird32VioDO-5KcgwrIQOm5nuIXsuERuAog'
 
 const searchPanel = new SearchPanel
 const artistsPanel = new ArtistsPanel
@@ -23,6 +23,8 @@ searchPanel.onSearch = function(query) {
             if (error) searchPanel.error = error.message
             else {
                 artistsPanel.artists = artists
+
+                searchPanel.hide()
 
                 artistsPanel.show()
             }
@@ -67,4 +69,10 @@ albumPanel.onAlbumSelected = function(albumId) {
     } catch (err){
 
     }
+}
+
+songsPanel.onGoBack = function() {
+    songsPanel.hide();
+    searchPanel.clear();
+    searchPanel.show();
 }
