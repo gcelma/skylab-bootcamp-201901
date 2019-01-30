@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css?family=Major+Mono+Display|Roboto");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../img/dolomites.jpg");
+  background-size: cover;
+  background-position: fixed;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  background-color: black;
+  height: 80px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+header img {
+  max-width: 150px;
+  margin: 15px 30px;
+}
+
+.search {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 5px;
+  margin-top: 150px;
+  padding: 30px 0px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.search h2 {
+  font-family: "Major Mono Display", monospace;
+  color: white;
+  margin-left: 15px;
+}
+.search form {
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 5px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.search form input {
+  margin-top: 2px;
+  margin-right: 10px;
+}
+.search form button {
+  background-color: #1CD760;
+}
+
+.results,
+.albums,
+.songs {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-radius: 5px;
+}
+.results h3,
+.albums h3,
+.songs h3 {
+  font-family: "Major Mono Display", monospace;
+  color: #1CD760;
+  font-size: 1.5em;
+}
+.results ul,
+.albums ul,
+.songs ul {
+  list-style-type: none;
+  margin-left: -35px;
+}
+
+.songs ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.songs ul li {
+  background-color: rgba(28, 215, 96, 0.8);
+  border-radius: 5px;
+  margin: 10px 5px;
+  padding: 10px 10px;
+}
+
+/*# sourceMappingURL=main.css.map */
