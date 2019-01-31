@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './vendor/bootstrap/4.1.3/css/bootstrap.css'
 import './index.css';
-import App from './App';
+import spotifyApi from './vendor/spotify-api/1.0.0/spotify-api-1.0.0'
+import App from './components/App/index';
 import * as serviceWorker from './serviceWorker';
+
+spotifyApi.token = 'BQDgnygFk3LSyrroNS-KfPWoyfPzwDVc3lkdGVuccYr-tdIJhHSaGBBzs6ZYsGSgVVQ582uBUhuLQpJF_o_xMkroXztelWlFYiqt1nWcFYWnB1I_YG15mcXKY_QuVlnQxXc4rVE3m-OITqPYgIo'
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

@@ -1,10 +1,8 @@
 import React from 'react'
-import './index.css'
+import './index.sass'
 
-function Feedback({message,level}) {
-    return <section className={`feedback ${level? `feedback--${level}` : ''}`} >
-        <p>{message}</p>
-    </section>
-} 
+function Feedback({ message }) {
+    return <section className="feedback">{message}</section>
+}
 
 export default Feedback
