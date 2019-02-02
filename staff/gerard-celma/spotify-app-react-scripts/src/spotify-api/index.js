@@ -14,16 +14,16 @@ const spotifyApi = {
      * argument informs the error message, othwerwise first argument is undefined and second argument provides the matching 
      * results.
      */
-    searchArtists(query, callback) {
-        fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist`, {
+    searchArtists(query, token) {
+        return fetch(`https://api.spotify.com/v1/search?q=${query}&type=artist`, {
             method: 'GET',
             headers: {
-                authorization: `Bearer ${this.token}`
+                authorization: `Bearer ${token}`
             }
         })
             .then(res => res.json())
-            .then(({ artists: { items } }) => callback(undefined, items))
-            .catch(callback)
+            .then(({ artists: { items } }) => items)
+            .catch(error => error)
     },
 
     /**

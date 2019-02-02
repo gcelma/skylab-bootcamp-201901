@@ -1,5 +1,5 @@
 import users from '../data/data'
-import spotifyApi from '../vendor/spotify-api/1.0.0/spotify-api-1.0.0'
+import spotifyApi from '../spotify-api/index'
 
 spotifyApi.token = 'BQDgnygFk3LSyrroNS-KfPWoyfPzwDVc3lkdGVuccYr-tdIJhHSaGBBzs6ZYsGSgVVQ582uBUhuLQpJF_o_xMkroXztelWlFYiqt1nWcFYWnB1I_YG15mcXKY_QuVlnQxXc4rVE3m-OITqPYgIo'
 
