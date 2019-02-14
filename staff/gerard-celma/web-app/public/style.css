@@ -1,0 +1,39 @@
+.home, .login, .feedback, .register {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+}
+
+.home, .login, .feedback, .register {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+}
+
+.feedback {
+  background-color: limegreen;
+}
+.feedback--warn {
+  background-color: gold;
+}
+.feedback--error {
+  background-color: tomato;
+}
+
+.home, .login, .register, .feedback {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+}
+
+.home, .register, .feedback, .login {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+}
+
+/*# sourceMappingURL=style.css.map */
