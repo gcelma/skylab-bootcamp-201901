@@ -34,18 +34,18 @@ function pullFeedback(req) {
     return feedback
 }
 
-function renderPage(content) {
-    return `<html>
-<head>
-    <title>HELLO WORLD!</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body class="main">
-    <h1>HELLO WORLD! 🤡</h1>
-    ${content}
-</body>
-</html>`
-}
+// function renderPage(content) {
+//     return `<html>
+// <head>
+//     <title>HELLO WORLD!</title>
+//     <link rel="stylesheet" type="text/css" href="style.css">
+// </head>
+// <body class="main">
+//     <h1>HELLO WORLD! 🤡</h1>
+//     ${content}
+// </body>
+// </html>`
+// }
 
 app.get('/', (req, res) => {
     res.render('landing')
@@ -70,11 +70,7 @@ app.post('/register', formBodyParser, (req, res) => {
 
     try {
         logic.registerUser(name, surname, email, password, passwordConfirm)
-            .then(() => res.send(renderPage(`<section class="register">
-        <h2>Registration confirmation</h2>
-        Ok, user <strong>${email}</strong> successfully registered, please proceed to <a href="/login">login</a>.
-        </form>
-    </section>`)))
+            .then(() => res.render('register-confirm', { email }))
             .catch(({ message }) => {
                 req.session.feedback = message
 
@@ -127,15 +123,7 @@ app.get('/home', (req, res) => {
 
         if (logic.isUserLoggedIn)
             logic.retrieveUser()
-                .then(user => res.send(renderPage(`<section class="home">
-        Welcome, ${user.name}!
-        ${feedback ? `<section class="feedback feedback--error">
-            ${feedback}
-        </section>` : ''}
-        <form action="/logout" method="post">
-            <button type="submit">Logout</button>
-        </form>
-    </section>`)))
+                .then(user => res.render('home', {user}))
                 .catch(({ message }) => {
                     req.session.feedback = message
 
