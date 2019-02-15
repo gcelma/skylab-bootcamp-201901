@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const session = require('express-session')
-const logic = require('./src/logic')
+const FileStore = require('session-file-store')(session)
+const logicFactory = require('./src/logic-factory')
 
 const { argv: [, , port = 8080] } = process
 
@@ -12,6 +13,9 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     // cookie: { secure: true }
+    store: new FileStore({
+        path: './.sessions'
+    })
 }))
 
 const formBodyParser = bodyParser.urlencoded({ extended: false })
@@ -24,21 +28,6 @@ function pullFeedback(req) {
     req.session.feedback = null
 
     return feedback
-}
-
-function isUserLoggedIn(req) {
-    const { session: { userId, token } } = req
-
-    return !!(userId && token)
-}
-
-function logoutUser(req) {
-    // WARN cleaning just session does not renew cookie (two consecutive users would re-use same cookie, not recommended)
-    // const { session } = req
-    // delete session.userId
-    // delete session.token
-
-    req.session.destroy() // NOTE this method destroys session and renews cookie (recommended)
 }
 
 function renderPage(content) {
@@ -61,7 +50,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/register', (req, res) => {
-    if (isUserLoggedIn(req)) {
+    const logic = logicFactory.create(req)
+
+    if (logic.isUserLoggedIn) {
         res.redirect('/home')
     } else {
         const feedback = pullFeedback(req)
@@ -87,6 +78,8 @@ app.get('/register', (req, res) => {
 app.post('/register', formBodyParser, (req, res) => {
     const { body: { name, surname, email, password, passwordConfirm } } = req
 
+    const logic = logicFactory.create(req)
+
     try {
         logic.registerUser(name, surname, email, password, passwordConfirm)
             .then(() => res.send(renderPage(`<section class="register">
@@ -107,7 +100,9 @@ app.post('/register', formBodyParser, (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-    if (isUserLoggedIn(req)) {
+    const logic = logicFactory.create(req)
+
+    if (logic.isUserLoggedIn) {
         res.redirect('/home')
     } else {
         const feedback = pullFeedback(req)
@@ -130,14 +125,11 @@ app.get('/login', (req, res) => {
 app.post('/login', formBodyParser, (req, res) => {
     const { body: { email, password } } = req
 
+    const logic = logicFactory.create(req)
+
     try {
         logic.logInUser(email, password)
-            .then(({ id, token }) => {
-                req.session.userId = id
-                req.session.token = token
-
-                res.redirect('/home')
-            })
+            .then(() => res.redirect('/home'))
             .catch(({ message }) => {
                 req.session.feedback = message
 
@@ -152,10 +144,12 @@ app.post('/login', formBodyParser, (req, res) => {
 
 app.get('/home', (req, res) => {
     try {
-        const { session: { userId, token, feedback } } = req
+        const { session: { feedback } } = req
 
-        if (userId && token)
-            logic.retrieveUser(userId, token)
+        const logic = logicFactory.create(req)
+
+        if (logic.isUserLoggedIn)
+            logic.retrieveUser()
                 .then(user => res.send(renderPage(`<section class="home">
         Welcome, ${user.name}!
         ${feedback ? `<section class="feedback feedback--error">
@@ -179,7 +173,9 @@ app.get('/home', (req, res) => {
 })
 
 app.post('/logout', (req, res) => {
-    logoutUser(req)
+    const logic = logicFactory.create(req)
+
+    logic.logOutUser()
 
     res.redirect('/')
 })
