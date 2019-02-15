@@ -1,11 +1,32 @@
-.home, .login, .feedback, .register {
+.main, .feedback, .landing, .home, .login, .register {
   border: 1px solid black;
   border-radius: 1em;
   padding: 1em;
   margin: 1em;
 }
 
-.home, .login, .feedback, .register {
+.main, .feedback, .landing, .home, .login, .register {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+}
+
+.main, .feedback, .landing, .home, .register, .login {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+}
+
+.main, .feedback, .landing, .register, .login, .home {
+  border: 1px solid black;
+  border-radius: 1em;
+  padding: 1em;
+  margin: 1em;
+}
+
+.main, .feedback, .register, .login, .home, .landing {
   border: 1px solid black;
   border-radius: 1em;
   padding: 1em;
@@ -22,14 +43,7 @@
   background-color: tomato;
 }
 
-.home, .login, .register, .feedback {
-  border: 1px solid black;
-  border-radius: 1em;
-  padding: 1em;
-  margin: 1em;
-}
-
-.home, .register, .feedback, .login {
+.main, .register, .login, .home, .landing, .feedback {
   border: 1px solid black;
   border-radius: 1em;
   padding: 1em;
