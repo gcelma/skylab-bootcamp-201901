@@ -41,7 +41,7 @@ describe('user api', () => {
 
         beforeEach(() =>
             userApi.register(name, surname, username, password)
-                .then(id => _id = id)
+                .then(data => _id = data.id)
         )
 
         it('should succeed on correct data', () =>
@@ -65,7 +65,7 @@ describe('user api', () => {
 
         beforeEach(() =>
             userApi.register(name, surname, username, password)
-                .then(id => _id = id)
+                .then(data => _id = data.id)
                 .then(() => userApi.authenticate(username, password))
                 .then(({ token }) => _token = token)
         )
@@ -93,7 +93,7 @@ describe('user api', () => {
 
         beforeEach(() =>
             userApi.register(name, surname, username, password)
-                .then(id => _id = id)
+                .then(data => _id = data.id)
                 .then(() => userApi.authenticate(username, password))
                 .then(({ token }) => _token = token)
         )
@@ -125,7 +125,7 @@ describe('user api', () => {
 
         beforeEach(() =>
             userApi.register(name, surname, username, password)
-                .then(id => _id = id)
+                .then(data => _id = data.id)
                 .then(() => userApi.authenticate(username, password))
                 .then(({ token }) => _token = token)
         )

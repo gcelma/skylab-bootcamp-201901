@@ -49,7 +49,7 @@ const logic = {
      * @param {string} password 
      */
     authenticateUser(email, password) {
-        debugger
+        
         if (typeof email !== 'string') throw TypeError(email + ' is not a string')
 
         if (!email.trim().length) throw Error('email cannot be empty')
