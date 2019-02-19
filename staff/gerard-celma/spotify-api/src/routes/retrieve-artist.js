@@ -1,12 +1,10 @@
-const logic = require('../../logic')
+const logic= require('../logic')
 
-module.exports = (req, res) => {
-    const {params:{ id }, headers:{ authorization}} = req
-
-    const token = authorization.split(' ')[1]
+module.exports = (req,res) => {
+    const {params:{ artistId }} = req
 
     try {
-        logic.retrieveUser(id,token)
+        logic.retrieveArtist(artistId)
             .then(res.json.bind(res))
             .catch(({ message }) => {
                 res.status(401).json({

@@ -1,10 +1,10 @@
-const logic = require('../../logic')
+const logic = require('../logic')
 
 module.exports = (req,res) => {
-    const{params:{ trackId }} = req
+    const{params:{ artistId }} = req
 
     try {
-        logic.retrieveTrack(trackId)
+        logic.retrieveAlbums(artistId)
             .then(res.json.bind(res))
             .catch(({ message }) => {
                 res.status(401).json({

@@ -28,24 +28,30 @@ const app = express()
 
 const jsonBodyParser = bodyParser.json()
 
-app.post('/register', jsonBodyParser, register.post)
+const router = express.Router()
 
-app.post('/authenticate', jsonBodyParser, authenticate.post)
 
-app.get('/retrieve/:id', retrieve.get)
+router.post('/user', jsonBodyParser, register)
 
-app.get('/searchArtists/:query', searchArtists.get)
+router.post('/user/auth', jsonBodyParser, authenticate)
 
-app.get('/retrieveArtist/:artistId', retrieveArtist.get)
+router.get('/user/:id', retrieve)
 
-app.get('/retrieveAlbums/:artistId', retrieveAlbums.get)
+router.get('/artists', searchArtists)
 
-app.get('/retrieveAlbum/:albumId', retrieveAlbum.get)
+router.get('/artists/:artistId', retrieveArtist)
 
-app.get('/retrieveTracks/:albumId', retrieveTracks.get)
+router.get('/albums/:artistId', retrieveAlbums)
 
-app.get('/retrieveTrack/:trackId', retrieveTrack.get)
+router.get('/album/:albumId', retrieveAlbum)
 
-app.get('*', notFound.get)
+router.get('/tracks/:albumId', retrieveTracks)
+
+router.get('/track/:trackId', retrieveTrack)
+
+router.get('*', notFound)
+
+
+app.use('/api', router)
 
 app.listen(port, () => console.log(`server running on port ${port}`))
