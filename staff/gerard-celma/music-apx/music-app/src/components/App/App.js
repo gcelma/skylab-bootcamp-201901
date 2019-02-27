@@ -20,7 +20,9 @@ class App extends Component {
 
     handleRegister = (name, surname, email, password, passwordConfirmation) => {
         try {
-
+            logic.registerUser(name, surname, email, password, passwordConfirmation)
+                .then(() => this.props.history.push('/login'))
+                .catch(({ message }) => this.setState({ registerFeedback: message }))
         } catch ({ message }) {
             this.setState({ registerFeedback: message })
         }
