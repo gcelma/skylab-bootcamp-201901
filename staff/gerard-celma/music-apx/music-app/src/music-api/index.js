@@ -56,14 +56,11 @@ const musicApi = {
             })
     },
 
-    retrieveUser(id, token) {
-        if (typeof id !== 'string') throw TypeError(`${id} is not a string`)
-        if (!id.trim().length) throw Error('id is empty')
-
+    retrieveUser(token) {
         if (typeof token !== 'string') throw TypeError(`${token} is not a string`)
         if (!token.trim().length) throw Error('token is empty')
 
-        return fetch(`${this.url}/user/${id}`, {
+        return fetch(`${this.url}/user`, {
             headers: {
                 authorization: `Bearer ${token}`
             }
@@ -76,16 +73,13 @@ const musicApi = {
             })
     },
 
-    updateUser(id, token, data) {
-        if (typeof id !== 'string') throw TypeError(`${id} is not a string`)
-        if (!id.trim().length) throw Error('id is empty')
-
+    updateUser(token, data) {
         if (typeof token !== 'string') throw TypeError(`${token} is not a string`)
         if (!token.trim().length) throw Error('token is empty')
 
         if (data.constructor !== Object) throw TypeError(`${data} is not an object`)
 
-        return fetch(`${this.url}/user/${id}`, {
+        return fetch(`${this.url}/user`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${token}`,
@@ -101,10 +95,7 @@ const musicApi = {
             })
     },
 
-    removeUser(id, token, email, password) {
-        if (typeof id !== 'string') throw TypeError(`${id} is not a string`)
-        if (!id.trim().length) throw Error('id is empty')
-
+    removeUser(token, email, password) {
         if (typeof token !== 'string') throw TypeError(`${token} is not a string`)
         if (!token.trim().length) throw Error('token is empty')
 
@@ -114,7 +105,7 @@ const musicApi = {
         if (typeof password !== 'string') throw TypeError(`${password} is not a string`)
         if (!password.trim().length) throw Error('password is empty')
 
-        return fetch(`${this.url}/user/${id}`, {
+        return fetch(`${this.url}/user`, {
             method: 'DELETE',
             headers: {
                 authorization: `Bearer ${token}`,
@@ -167,7 +158,7 @@ const musicApi = {
 
         if (!artistId.trim().length) throw Error('artistId is empty')
 
-        return fetch(`${this.url}/artists/${artistId}`, {
+        return fetch(`${this.url}/artist/${artistId}`, {
             headers: {
                 authorization: `Bearer ${this.token}`
             }
@@ -277,7 +268,7 @@ const musicApi = {
 
         if (!artistId.trim().length) throw Error('artistId is empty')
 
-        return fetch(`${this.url}/artists/${artistId}/albums`, {
+        return fetch(`${this.url}/artist/${artistId}/albums`, {
             headers: {
                 authorization: `Bearer ${this.token}`
             }
@@ -304,7 +295,7 @@ const musicApi = {
 
         if (!albumId.trim().length) throw Error('albumId is empty')
 
-        return fetch(`${this.url}/albums/${albumId}`, {
+        return fetch(`${this.url}/album/${albumId}`, {
             headers: {
                 authorization: `Bearer ${this.token}`
             }
@@ -331,7 +322,7 @@ const musicApi = {
 
         if (!albumId.trim().length) throw Error('albumId is empty')
 
-        return fetch(`${this.url}/albums/${albumId}/tracks`, {
+        return fetch(`${this.url}/album/${albumId}/tracks`, {
             headers: {
                 authorization: `Bearer ${this.token}`
             }
@@ -358,7 +349,7 @@ const musicApi = {
 
         if (!trackId.trim().length) throw Error('trackId is empty')
 
-        return fetch(`${this.url}/tracks/${trackId}`, {
+        return fetch(`${this.url}/track/${trackId}`, {
             headers: {
                 authorization: `Bearer ${this.token}`
             }

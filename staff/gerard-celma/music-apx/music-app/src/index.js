@@ -5,6 +5,20 @@ import './index.sass';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
+import logic from './logic'
+
+Object.defineProperties(logic, {
+    __userApiToken__: {
+        set(token) {
+            sessionStorage.setItem('__userApiToken__', token)
+        },
+
+        get() {
+            return sessionStorage.getItem('__userApiToken__')
+        }
+    }
+})
+
 ReactDOM.render(<HashRouter><App /></HashRouter>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

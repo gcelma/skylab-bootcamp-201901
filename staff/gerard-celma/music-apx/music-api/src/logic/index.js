@@ -85,16 +85,18 @@ const logic = {
             })
     },
 
-    __verifyUserToken__(userId, token) {
+    __verifyUserToken__(token) {
         const { sub } = jwt.verify(token, this.jwtSecret)
 
-        if (sub !== userId) throw Error(`user id ${userId} does not match token user id ${sub}`)
+        if (!sub) throw Error(`user id not present in token ${token}`)  
+
+        return sub
     },
 
-    retrieveUser(userId, token) {
+    retrieveUser(token) {
         // TODO validate userId and token type and content
 
-        this.__verifyUserToken__(userId, token)
+        const userId = this.__verifyUserToken__(token)
 
         return users.findById(userId)
             .then(user => {

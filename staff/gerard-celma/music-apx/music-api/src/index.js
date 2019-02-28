@@ -9,7 +9,7 @@ const spotifyApi = require('./spotify-api')
 const users = require('./data/users')
 const logic = require('./logic')
 
-const { registerUser, authenticateUser, retrieveUser, searchArtists, addCommentToArtist, listCommentsFromArtist, notFound } = require('./routes')
+const { registerUser, authenticateUser, retrieveUser, searchArtists, retrieveArtist, retrieveAlbums, retrieveAlbum, retrieveTracks, retrieveTrack, addCommentToArtist, listCommentsFromArtist, notFound } = require('./routes')
 
 const { env: { DB_URL, PORT, SPOTIFY_API_TOKEN, JWT_SECRET }, argv: [, , port = PORT || 8080] } = process
 
@@ -44,19 +44,28 @@ MongoClient.connect(DB_URL, { useNewUrlParser: true })
 
         router.post('/user/auth', jsonBodyParser, authenticateUser)
 
-        router.get('/user/:id', retrieveUser)
+        router.get('/user/', retrieveUser)
 
         router.get('/artists', searchArtists)
+
+        router.get('/artist/:artistId', retrieveArtist)
+
+        router.get('/artist/:artistId/albums', retrieveAlbums)
+
+        router.get('/album/:albumId', retrieveAlbum)
+
+        router.get('/album/:albumId/tracks', retrieveTracks)
+
+        router.get('/track/:trackId', retrieveTrack)
 
         router.post('/artist/:artistId/comment', jsonBodyParser, addCommentToArtist)
 
         router.get('/artist/:artistId/comment', listCommentsFromArtist)
 
-        // router.get('/artist/:id', retrieveArtist)
 
-        // router.get('/album/:id', retrieveAlbum)
+        
 
-        // router.get('/track/:id', retrieveTrack)
+        
 
         // app.get('*', notFound)
 

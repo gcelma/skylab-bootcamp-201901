@@ -1,13 +1,11 @@
 const logic = require('../logic')
 
 module.exports = (req, res) => {
-    const { headers: { authorization } } = req
-
-    const token = authorization.substring(7)
+    const { params: { trackId } } = req
 
     try {
-        logic.retrieveUser(token)
-            // .then(user => res.json(user))
+        logic.retrieveTrack(trackId)
+            // .then(artists => res.json(artists))
             .then(res.json.bind(res))
             .catch(({ message }) => {
                 res.status(400).json({
