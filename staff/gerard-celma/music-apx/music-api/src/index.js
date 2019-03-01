@@ -33,7 +33,7 @@ mongoose.connect(DB_URL, { useNewUrlParser: true })
 
         router.post('/user/auth', jsonBodyParser, authenticateUser)
 
-        router.get('/user/', retrieveUser)
+        router.get('/user', tokenVerifierMiddleware, retrieveUser)
 
         router.get('/artists', searchArtists)
 
@@ -51,7 +51,7 @@ mongoose.connect(DB_URL, { useNewUrlParser: true })
 
         router.get('/artist/:artistId/comment', listCommentsFromArtist)
 
-        app.get('*', notFound)
+        router.get('*', notFound)
 
         
         app.use('/api', router)

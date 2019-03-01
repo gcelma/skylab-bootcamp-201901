@@ -29,18 +29,15 @@ const User = new Schema({
     },
 
     favoriteArtists: [{
-        type: String,
-        unique: true
+        type: String
     }],
 
     favoriteAlbums: [{
-        type: String,
-        unique: true
+        type: String
     }],
 
     favoriteTracks: [{
-        type: String,
-        unique: true
+        type: String
     }]
 })
 

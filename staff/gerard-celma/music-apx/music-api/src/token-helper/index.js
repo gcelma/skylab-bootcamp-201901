@@ -19,13 +19,14 @@ const tokenHelper = {
 
     tokenVerifierMiddleware(req, res, next) {
         const { headers: { authorization } } = req
-
+        debugger
         const token = authorization.substring(7)
 
         try {
             const userId = this.verifyToken(token)
 
             req.userId = userId
+            debugger
         } catch ({ message }) {
             return res.status(401).json({ error: message })
         }
