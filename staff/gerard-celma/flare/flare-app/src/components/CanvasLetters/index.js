@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './gsap'
 import './index.sass'
 
 class CanvasLetters extends Component {
@@ -12,7 +13,7 @@ class CanvasLetters extends Component {
         let offset = 0
         let pathCount = 0
         let interpolationPoint = {percentage: 0}
-        ctx.lineWidth = 8
+        ctx.lineWidth = 6
         ctx.lineCap = "round"
 
         var paths = [samplePath(this.circlePath), samplePath(this.rectPath), samplePath(this.trianglePath), samplePath(this.gerardPath)]
@@ -91,7 +92,7 @@ class CanvasLetters extends Component {
         if (pathCount+1 <= 3) pathPointsTo = paths[pathCount+1];
         else pathPointsTo = paths[0];
         
-        TweenLite.to(interpolationPoint, 0.7, {percentage: 1, delay: 0.4, onComplete: function() {
+        TweenLite.to(interpolationPoint, 0.7, {percentage: 1, delay: 0.4, onComplete: function() { // eslint-disable-line
             interpolationPoint.percentage = 0;
             
             pathCount++;
